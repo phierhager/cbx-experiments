@@ -1,0 +1,123 @@
+# Description: Default configuration file for the optimization algorithms
+# Author: Philip Hierhager
+# Usage:
+#   - For every numerical variable, one could specify a range, step, and mode.
+#   - If the mode is in log, the step is ignored. Instead, there is an 
+#     additional parameter num_points. For examples, see below.
+#   - If the mode is in lin, the step is used to generate the range.
+
+defaults: 
+  &defaults
+  name_f: 
+    - rastrigin
+    - ackley
+    # - three_hump_camel
+    # - mccormick
+    # - himmelblau
+    # - rosenbrock
+    # - rastrigin_multimodal
+    # - ackley_multimodal
+    # - accelerated_sinus
+    # - nd_sinus
+    # - p_4th_order
+    # - quadratic
+    # - banana
+    # - bimodal
+    # - unimodal
+    # - bukin6
+    # - cross_in_tray
+    # - easom
+    # - drop_wave
+    # - holder_table
+    # - snowflake
+    # - eggholder
+    # - michalewicz
+
+name: default
+
+selected_dynamics: 
+  - cbo
+  # - cbo_memory
+  # - pso
+  # - cbs
+  # - polar_cbo
+
+config_dynamics:
+  particle_dynamic: 
+    &particle_dynamic
+    <<: *defaults
+    f_dim: 3D
+    check_f_dims: true
+    x: null
+    x_min: 0.5
+    x_max: 5.0
+    M: 50
+    N: 
+      range: [10, 50]
+      step: 10
+    d: 2
+    max_it: 500
+    term_criteria: null
+    track_args: null
+    verbosity: 0
+    copy: null
+    norm: null
+    normal: null
+    post_process: null
+
+  cbx:
+    &cbx
+    <<: *particle_dynamic
+    noise: anisotropic
+    batch_args: null
+    dt: 0.02
+    alpha: 
+      range: [10, 1000]
+      mode: log
+      num_points: 4
+    sigma: 
+      range: [0.25, 8.0]
+      step: 1.0
+    lamda: 
+      range: [0.1, 2.0]
+      step: 0.5
+    correction: no_correction
+    correction_eps: 0.001
+    compute_consensus: null
+
+  cbo: 
+    &cbo
+    <<: *cbx
+
+  cbo_memory:
+    &cbo_memory
+    <<: *cbx
+    lamda_memory: 0.4
+    sigma_memory: 0.1
+
+  cbs:
+    &cbs
+    <<: *cbx
+    mode: sampling
+
+  polar_cbo:
+    &polarcbo
+    <<: *cbo
+    kernel: Gaussian
+    kappa: 1.0
+    kernel_factor_mode: alpha
+    compute_consensus: null
+
+  pso:
+    &pso
+    <<: *particle_dynamic
+    m: 0.001
+    gamma: null
+    lamda_memory: 0.4
+    sigma_memory: null
+
+config_opt:
+  sched: 
+    factor: 1.02
+    maximum: 1_000_000_000
+  print_int: null

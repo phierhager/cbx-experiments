@@ -1,0 +1,13 @@
+repos:
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: 'v1.13.0'  # Use the latest stable version of mypy
+    hooks:
+      - id: mypy
+        args: [--config-file=checker-configs/mypy.ini]  # Adjust if using a custom config file
+        additional_dependencies: []  # Add mypy plugins here if needed
+
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: 'v0.8.1'  # Use the latest stable version of ruff
+    hooks:
+      - id: ruff
+        args: [--fix]  # Optional: autofix issues where possible
