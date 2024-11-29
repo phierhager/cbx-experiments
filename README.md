@@ -1,6 +1,6 @@
 # CBX Experiments
 
-Welcome to the CBX Experiments repository. This project is dedicated to exploring and experimenting with various CBX techniques and methodologies.
+Welcome to the CBX Experiments repository. This project is dedicated to exploring and experimenting with various CBX techniques and methodologies. It is built upon the [CBXpy](https://github.com/PdIPS/CBXpy).
 
 ## Table of Contents
 
@@ -16,7 +16,7 @@ This repository contains a collection of experiments and research related to CBX
 
 ## Installation
 
-To get started with this project, clone the repository and install the necessary dependencies. For this use [poetry]{https://python-poetry.org/}
+To get started with this project, clone the repository and install the necessary dependencies. For this use [poetry](https://python-poetry.org/)
 
 ```bash
 git clone https://github.com/phierhager/cbx-experiments.git
